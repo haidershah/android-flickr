@@ -16,4 +16,3 @@ data class FlickrPhoto(
     @SerializedName("secret")
     val secret: String
 )
-//"https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg"
