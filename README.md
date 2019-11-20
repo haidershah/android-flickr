@@ -1,1 +1,1 @@
-# android-flikr
+# android-flickr
