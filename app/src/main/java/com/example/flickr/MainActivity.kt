@@ -1,4 +1,4 @@
-package com.example.flikr
+package com.example.flickr
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

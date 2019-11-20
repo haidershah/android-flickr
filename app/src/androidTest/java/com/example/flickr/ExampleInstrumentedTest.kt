@@ -1,4 +1,4 @@
-package com.example.flikr
+package com.example.flickr
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
