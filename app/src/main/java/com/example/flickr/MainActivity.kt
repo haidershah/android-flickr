@@ -2,6 +2,7 @@ package com.example.flickr
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,16 +12,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+private const val SPAN_COUNT = 3
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = PhotoAdapter(this)
+        val adapter = PhotoAdapter(this, getPhotoDimen())
 
         val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.layoutManager = GridLayoutManager(this, SPAN_COUNT)
         recyclerView.adapter = adapter
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -31,5 +34,13 @@ class MainActivity : AppCompatActivity() {
                 adapter.addPhotos(response.responsePhotos.photos)
             }
         }
+    }
+
+    private fun getPhotoDimen(): Int {
+        val displayMetrics = DisplayMetrics();
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val screenWidth = displayMetrics.widthPixels
+
+        return screenWidth / SPAN_COUNT
     }
 }

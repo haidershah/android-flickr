@@ -9,7 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.flickr.network.model.FlickrPhoto
 
-class PhotoAdapter(private val context: Context) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
+class PhotoAdapter(
+    private val context: Context,
+    private val photoDimen: Int
+) :
+    RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
+
     private val data = mutableListOf<FlickrPhoto>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,6 +36,7 @@ class PhotoAdapter(private val context: Context) : RecyclerView.Adapter<PhotoAda
         Glide
             .with(context)
             .load(url)
+            .override(photoDimen, photoDimen)
             .centerCrop()
             .into(holder.photoView)
     }
