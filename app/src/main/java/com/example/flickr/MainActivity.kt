@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             val response = FlickrApi.RETROFIT_SERVICE.getPhotos()
 
             withContext(Dispatchers.Main) {
-                Log.e("yooooo", "response: $response")
                 adapter.addPhotos(response.responsePhotos.photos)
             }
         }

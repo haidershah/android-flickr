@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.example.flickr.network.model.FlickrPhoto
 
 class PhotoAdapter(
@@ -33,12 +34,18 @@ class PhotoAdapter(
         val url =
             "https://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg"
 
-        Glide
-            .with(context)
+        // resize width, but keep original height, does not keep aspect ratio
+        Glide.with(context)
             .load(url)
-            .override(photoDimen, photoDimen)
-            .centerCrop()
+            .override(photoDimen, Target.SIZE_ORIGINAL) // original height
             .into(holder.photoView)
+
+        // square image
+//        Glide.with(context)
+//            .load(url)
+//            .override(photoDimen)
+//            .centerCrop()
+//            .into(holder.photoView)
     }
 
     override fun getItemCount() = data.size
